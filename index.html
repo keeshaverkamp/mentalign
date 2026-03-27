@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stichting MentAlign – Digitale infrastructuur voor betere GGZ-zorg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300;1,9..144,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0d2428;
+  --bg-card:   #122d32;
+  --bg-mid:    #163438;
+  --teal:      #2bbfa0;
+  --teal-dim:  rgba(43,191,160,0.12);
+  --teal-glow: rgba(43,191,160,0.06);
+  --navy:      #2A438D;
+  --swoosh:    #61A5FA;
+  --white:     #ffffff;
+  --off:       rgba(255,255,255,0.85);
+  --muted:     rgba(255,255,255,0.45);
+  --border:    rgba(255,255,255,0.08);
+  --border-t:  rgba(43,191,160,0.2);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--off);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(13,36,40,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 62px;
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 0.6rem;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 700; color: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-size: 1.2rem; font-weight: 600;
+  color: var(--white); font-family: 'DM Sans', sans-serif;
+}
+.logo-text span { color: var(--teal); }
+
+.nav-links {
+  display: flex; align-items: center; gap: 2rem;
+}
+.nav-links a {
+  font-size: 0.875rem; color: var(--muted);
+  text-decoration: none; transition: color .15s;
+}
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  background: var(--teal); color: var(--bg);
+  font-size: 0.85rem; font-weight: 600;
+  padding: 0.5rem 1.2rem; border-radius: 6px;
+  text-decoration: none; transition: opacity .2s;
+}
+.nav-cta:hover { opacity: .85; }
+
+@media (max-width: 680px) { .nav-links { display: none; } }
+
+/* ── HERO ── */
+.hero {
+  min-height: 92vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 7rem 2.5rem 5rem;
+  position: relative; overflow: hidden;
+}
+
+/* Subtle radial glow */
+.hero::before {
+  content: '';
+  position: absolute; top: -20%; right: -10%;
+  width: 700px; height: 700px;
+  background: radial-gradient(ellipse, rgba(43,191,160,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -10%; left: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(ellipse, rgba(42,67,141,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 900px; margin: 0 auto; width: 100%;
+  position: relative; z-index: 1;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  color: var(--teal); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--teal);
+  animation: blink 2.5s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  font-weight: 300; line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  max-width: 820px;
+}
+
+.hero h1 em {
+  font-style: italic; color: var(--teal);
+}
+
+.hero-sub {
+  font-size: 1.1rem; color: var(--muted);
+  max-width: 560px; font-weight: 300; line-height: 1.75;
+  margin-bottom: 3rem;
+}
+
+.hero-actions {
+  display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
+  margin-bottom: 4.5rem;
+}
+
+.btn-teal {
+  background: var(--teal); color: var(--bg);
+  font-size: 0.95rem; font-weight: 600;
+  padding: 0.85rem 1.75rem; border-radius: 8px;
+  text-decoration: none; transition: opacity .2s;
+  display: inline-block;
+}
+.btn-teal:hover { opacity: .88; }
+
+.btn-outline {
+  color: var(--off);
+  font-size: 0.9rem; font-weight: 400;
+  padding: 0.85rem 1.5rem; border-radius: 8px;
+  text-decoration: none; border: 1px solid var(--border);
+  transition: border-color .2s, color .2s;
+  display: inline-block;
+}
+.btn-outline:hover { border-color: rgba(255,255,255,.25); color: var(--white); }
+
+/* Platforms preview cards */
+.hero-platforms {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  max-width: 720px;
+}
+
+@media (max-width: 580px) { .hero-platforms { grid-template-columns: 1fr; } }
+
+.platform-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.5rem;
+  text-decoration: none;
+  display: block;
+  transition: border-color .25s, transform .25s;
+  position: relative; overflow: hidden;
+}
+.platform-card:hover {
+  border-color: var(--border-t);
+  transform: translateY(-3px);
+}
+.platform-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.pc-1::before { background: linear-gradient(90deg, var(--teal), rgba(43,191,160,.2)); }
+.pc-2::before { background: linear-gradient(90deg, var(--swoosh), rgba(97,165,250,.2)); }
+
+.pc-tag {
+  display: inline-block;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.2rem 0.6rem; border-radius: 4px;
+  margin-bottom: 0.85rem;
+}
+.pc-tag-teal  { background: var(--teal-dim); color: var(--teal); }
+.pc-tag-blue  { background: rgba(97,165,250,.12); color: var(--swoosh); }
+
+.platform-card h3 {
+  font-size: 1.05rem; font-weight: 600; color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.platform-card p {
+  font-size: 0.85rem; color: var(--muted); line-height: 1.55;
+  margin-bottom: 1rem;
+}
+
+.pc-link {
+  font-size: 0.8rem; color: var(--teal); font-weight: 500;
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  transition: gap .2s;
+}
+.platform-card:hover .pc-link { gap: 0.6rem; }
+
+/* ── SECTION BASE ── */
+section { padding: 5.5rem 2.5rem; }
+.section-inner { max-width: 900px; margin: 0 auto; }
+
+.s-eyebrow {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--teal);
+  display: block; margin-bottom: 0.85rem;
+}
+
+.s-h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+  font-weight: 300; color: var(--white);
+  line-height: 1.2; margin-bottom: 1rem;
+}
+
+.s-lead {
+  font-size: 1rem; color: var(--muted); font-weight: 300;
+  line-height: 1.8; max-width: 640px;
+  margin-bottom: 3rem;
+}
+
+/* ── DOELSTELLINGEN ── */
+.doelen { background: var(--bg-mid); }
+
+.doelen-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--border); border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--border);
+}
+@media (max-width: 660px) { .doelen-grid { grid-template-columns: 1fr; } }
+
+.doel-card {
+  background: var(--bg-card); padding: 2rem 1.75rem;
+  position: relative;
+}
+.doel-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.dc-1::before { background: var(--teal); }
+.dc-2::before { background: rgba(43,191,160,.5); }
+.dc-3::before { background: rgba(43,191,160,.25); }
+
+.doel-num {
+  font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 600;
+  color: rgba(43,191,160,.18); line-height: 1; margin-bottom: 0.85rem;
+}
+
+.doel-card h3 {
+  font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem;
+}
+.doel-card p {
+  font-size: 0.875rem; color: var(--muted); line-height: 1.65;
+}
+
+/* ── PLATFORMS ── */
+.platforms-section { background: var(--bg); }
+
+.platforms-full {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+@media (max-width: 640px) { .platforms-full { grid-template-columns: 1fr; } }
+
+.pf-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 2rem;
+  text-decoration: none; display: block;
+  transition: border-color .25s, transform .25s;
+  position: relative; overflow: hidden;
+}
+.pf-card:hover { border-color: var(--border-t); transform: translateY(-3px); }
+.pf-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.pf-1::before { background: var(--teal); }
+.pf-2::before { background: linear-gradient(90deg, var(--navy), var(--swoosh)); }
+
+.pf-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  margin-bottom: 1.25rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+}
+.pf-icon-teal { background: var(--teal-dim); }
+.pf-icon-blue { background: rgba(97,165,250,.12); }
+
+.pf-badge {
+  display: inline-block; font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 0.22rem 0.6rem; border-radius: 4px;
+  margin-bottom: 1rem;
+}
+.pf-badge-teal { background: var(--teal-dim); color: var(--teal); }
+.pf-badge-blue { background: rgba(97,165,250,.12); color: var(--swoosh); }
+
+.pf-card h3 { font-size: 1.2rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
+.pf-card .pf-url { font-size: 0.8rem; color: var(--teal); margin-bottom: 0.85rem; font-weight: 400; }
+.pf-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.25rem; }
+
+.pf-features { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem; }
+.pf-features li {
+  font-size: 0.82rem; color: rgba(255,255,255,.55);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.pf-features li::before { content: '✓'; color: var(--teal); font-weight: 600; font-size: 0.75rem; }
+
+.pf-cta {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.875rem; font-weight: 500; text-decoration: none;
+  transition: gap .2s;
+}
+.pf-cta-teal { color: var(--teal); }
+.pf-cta-blue { color: var(--swoosh); }
+.pf-card:hover .pf-cta { gap: 0.65rem; }
+
+/* ── STICHTING ── */
+.stichting {
+  background: var(--bg-mid);
+  position: relative; overflow: hidden;
+}
+.stichting::before {
+  content: '';
+  position: absolute; top: -150px; right: -150px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(43,191,160,.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.stichting-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start;
+}
+@media (max-width: 700px) { .stichting-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+.stichting-values { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.value-row {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 1.25rem;
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.value-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--teal-dim); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+}
+
+.value-row h4 { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 0.25rem; }
+.value-row p  { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+
+.stichting-right {}
+
+.stat-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border-t);
+  border-radius: 14px; padding: 2rem;
+  margin-bottom: 1.25rem;
+}
+.stat-block h4 { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem; }
+
+.stat-row {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+.stat-label { font-size: 0.82rem; color: var(--muted); flex: 1; }
+.stat-val { font-size: 0.85rem; color: var(--white); font-weight: 500; text-align: right; }
+
+/* ── PARTNERS ── */
+.partners { background: var(--bg); }
+
+.partners-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+}
+@media (max-width: 640px) { .partners-grid { grid-template-columns: 1fr; } }
+
+.partner-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem;
+}
+
+.partner-role {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--teal);
+  margin-bottom: 0.5rem; display: block;
+}
+.partner-card h3 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; }
+.partner-card p  { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+
+/* ── CTA ── */
+.cta-section { background: var(--bg-mid); padding: 5rem 2.5rem; }
+
+.cta-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-t);
+  border-radius: 20px; padding: 4rem;
+  text-align: center; position: relative; overflow: hidden;
+  max-width: 720px; margin: 0 auto;
+}
+.cta-box::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--teal), rgba(97,165,250,.6), var(--teal));
+  background-size: 200%;
+  animation: shimmer 4s linear infinite;
+}
+@keyframes shimmer { 0%{background-position:0%} 100%{background-position:200%} }
+
+.cta-box h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 300; color: var(--white);
+  margin-bottom: 1rem; line-height: 1.2;
+}
+.cta-box p {
+  font-size: 1rem; color: var(--muted); line-height: 1.75;
+  margin-bottom: 2rem; max-width: 480px; margin-left: auto; margin-right: auto;
+}
+.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ── FOOTER ── */
+footer {
+  background: rgba(0,0,0,.35);
+  border-top: 1px solid var(--border);
+  padding: 2.5rem;
+}
+
+.footer-inner {
+  max-width: 900px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1.5rem;
+}
+
+.footer-left .logo-text { font-size: 1.1rem; }
+.footer-left p { font-size: 0.78rem; color: var(--muted); margin-top: 0.25rem; }
+
+.footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.footer-links a { font-size: 0.8rem; color: var(--muted); text-decoration: none; transition: color .15s; }
+.footer-links a:hover { color: var(--white); }
+
+.footer-partners {
+  width: 100%; padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+}
+.fp-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,.2); }
+.fp-items { display: flex; gap: 1.75rem; flex-wrap: wrap; }
+.fp-item { font-size: 0.8rem; color: rgba(255,255,255,.35); }
+.fp-item strong { color: rgba(255,255,255,.55); font-weight: 500; }
+
+/* ── REVEAL ── */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .rd1 { transition-delay: .1s; } .rd2 { transition-delay: .2s; } .rd3 { transition-delay: .3s; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="logo-icon">M</div>
+    <span class="logo-text">Ment<span>Align</span></span>
+    <span style="font-size:.65rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;background:rgba(43,191,160,.15);color:var(--teal);border:1px solid rgba(43,191,160,.3);padding:.15rem .45rem;border-radius:4px;margin-left:.25rem">Beta</span>
+  </a>
+  <div class="nav-links">
+    <a href="#doelstellingen">Doelstellingen</a>
+    <a href="#platforms">Platforms</a>
+    <a href="#stichting">Stichting</a>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span class="eyebrow-dot"></span>Stichting MentAlign · In oprichting 2026 · Beta</div>
+    <h1>Digitale infrastructuur<br>voor <em>betere GGZ-zorg</em></h1>
+    <p class="hero-sub">MentAlign is een not-for-profit stichting die digitale hulpmiddelen ontwikkelt die de toegankelijkheid en kwaliteit van geestelijke gezondheidszorg in Nederland structureel verbeteren.</p>
+    <div class="hero-actions">
+      <a href="#platforms" class="btn-teal">Bekijk onze platforms</a>
+      <a href="#stichting" class="btn-outline">Over de stichting</a>
+    </div>
+
+    <!-- Two platform preview cards -->
+    <div class="hero-platforms">
+      <a href="https://rapporteren.mentalign.nl" class="platform-card pc-1">
+        <span class="pc-tag pc-tag-teal">Rapportage</span>
+        <h3>MentAlign Spraak naar Tekst</h3>
+        <p>Automatische rapportage voor GGZ-behandelaren. Gratis, op Nederlandse servers.</p>
+        <span class="pc-link">rapporteren.mentalign.nl →</span>
+      </a>
+      <a href="https://msp.mentalign.nl" class="platform-card pc-2">
+        <span class="pc-tag pc-tag-blue">Verwijzing</span>
+        <h3>Mentaal Schakelpunt</h3>
+        <p>Transparant aanbodoverzicht en gerichte verwijzing voor regio's en huisartsen.</p>
+        <span class="pc-link">msp.mentalign.nl →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DOELSTELLINGEN -->
+<section class="doelen" id="doelstellingen">
+  <div class="section-inner">
+    <span class="s-eyebrow reveal">Doelstellingen</span>
+    <h2 class="s-h2 reveal">Wat wij willen bereiken</h2>
+    <p class="s-lead reveal">MentAlign zet in op structurele verbetering van de GGZ-zorgketen in Nederland — via open, niet-commerciële digitale infrastructuur die breed beschikbaar is.</p>
+
+    <div class="doelen-grid">
+      <div class="doel-card dc-1 reveal">
+        <div class="doel-num">01</div>
+        <h3>Registratielast verminderen</h3>
+        <p>Behandelaren besteden te veel tijd aan administratie. Onze spraak-naar-tekst technologie geeft hen tijd terug — zodat ze meer kunnen behandelen en minder schrijven.</p>
+      </div>
+      <div class="doel-card dc-2 reveal rd1">
+        <div class="doel-num">02</div>
+        <h3>Verwijzing verbeteren</h3>
+        <p>Patiënten met mentale klachten vinden niet altijd de juiste hulp op het juiste moment. Het Mentaal Schakelpunt maakt het aanbod transparant en verwijzing direct mogelijk.</p>
+      </div>
+      <div class="doel-card dc-3 reveal rd2">
+        <div class="doel-num">03</div>
+        <h3>Landelijk opschalen</h3>
+        <p>Onze infrastructuur is ontworpen om landelijk te werken. Regio's sluiten aan op gedeelde standaarden, maar houden hun eigen inrichting. Eén platform, breed toepasbaar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section class="platforms-section" id="platforms">
+  <div class="section-inner">
+    <span class="s-eyebrow reveal">Onze platforms</span>
+    <h2 class="s-h2 reveal">Twee producten, één missie</h2>
+    <p class="s-lead reveal">MentAlign ontwikkelt en beheert twee complementaire platforms die elk een specifiek knelpunt in de GGZ-zorgketen aanpakken.</p>
+
+    <div class="platforms-full">
+      <a href="https://rapporteren.mentalign.nl" class="pf-card pf-1 reveal">
+        <div class="pf-icon pf-icon-teal">🎙️</div>
+        <span class="pf-badge pf-badge-teal">Beschikbaar · Beta</span>
+        <h3>Spraak naar Tekst Rapportage</h3>
+        <div class="pf-url">rapporteren.mentalign.nl</div>
+        <p>MentAlign zet gesproken sessies automatisch om in professionele GGZ-rapportages. Gratis voor behandelaren met BIG-registratie — u betaalt alleen de rekenkracht die u daadwerkelijk gebruikt.</p>
+        <ul class="pf-features">
+          <li>Keuze uit 15+ spraakherkenners en taalmodellen</li>
+          <li>Realtime onderwerpsmonitoring tijdens het gesprek</li>
+          <li>Aantoonbaar veilig — hosting op Nederlandse servers</li>
+          <li>Koppelbaar aan EPD via Hawking Discovery API</li>
+        </ul>
+        <span class="pf-cta pf-cta-teal">Bekijk het platform →</span>
+      </a>
+
+      <a href="https://msp.mentalign.nl" class="pf-card pf-2 reveal rd1">
+        <div class="pf-icon pf-icon-blue">🔗</div>
+        <span class="pf-badge pf-badge-blue">In ontwikkeling · MVP 2026</span>
+        <h3>Mentaal Schakelpunt (MSP)</h3>
+        <div class="pf-url">msp.mentalign.nl</div>
+        <p>Het MSP maakt het GGZ- en welzijnsaanbod transparant voor huisartsen en verwijzers. Inclusief actuele wachttijden, specialisaties en directe verwijsmogelijkheid — regionaal ingericht op landelijke infrastructuur.</p>
+        <ul class="pf-features">
+          <li>Landelijke aanbodcatalogus (GGZ, welzijn, sociaal domein)</li>
+          <li>AI-ondersteunde vraagverheldering voor huisartsen</li>
+          <li>Integratie met ZorgDomein en andere verwijsservices</li>
+          <li>Federatief model: landelijke standaard, lokale inrichting</li>
+        </ul>
+        <span class="pf-cta pf-cta-blue">Meer over het MSP →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STICHTING -->
+<section class="stichting" id="stichting">
+  <div class="section-inner">
+    <span class="s-eyebrow reveal">Over de stichting</span>
+    <h2 class="s-h2 reveal">Niet-commercieel,<br>niet-concurrentieel</h2>
+    <p class="s-lead reveal">MentAlign is opgericht als stichting zonder winstoogmerk. Geen aandeelhouders, geen commercieel belang. Ons enige doel is het structureel verbeteren van de GGZ-zorg voor iedereen die dit nodig heeft.</p>
+
+    <div class="stichting-grid">
+      <div class="stichting-values">
+        <div class="value-row reveal">
+          <div class="value-icon">🏛️</div>
+          <div>
+            <h4>Onafhankelijk bestuur</h4>
+            <p>De stichting wordt bestuurd door professionals met ervaring in zorgorganisatie, beleid en zorgtechnologie. Geen commerciële belangen, geen aandeelhouders.</p>
+          </div>
+        </div>
+        <div class="value-row reveal rd1">
+          <div class="value-icon">🔓</div>
+          <div>
+            <h4>Open infrastructuur</h4>
+            <p>Onze platforms zijn ontworpen als gedeelde infrastructuur. Non-exclusief, interoperabel en geschikt voor aansluiting door meerdere regio's, verzekeraars en aanbieders.</p>
+          </div>
+        </div>
+        <div class="value-row reveal rd2">
+          <div class="value-icon">🇳🇱</div>
+          <div>
+            <h4>Soeverein en veilig</h4>
+            <p>Alle data verwerking vindt plaats op Nederlandse servers. AVG-compliant, NEN 7510 gecertificeerd — geschikt voor gevoelige patiëntinformatie.</p>
+          </div>
+        </div>
+        <div class="value-row reveal rd3">
+          <div class="value-icon">🤝</div>
+          <div>
+            <h4>Samenwerking centraal</h4>
+            <p>MentAlign werkt samen met zorgverzekeraars, GGZ-aanbieders, regio's en beleidsmakers. Niet naast hen, maar mét hen — als neutrale facilitator.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stichting-right reveal rd1">
+        <div class="stat-block">
+          <h4>Stichtingsgegevens</h4>
+          <div class="stat-row"><span class="stat-label">Rechtsvorm</span><span class="stat-val">Stichting</span></div>
+          <div class="stat-row"><span class="stat-label">Winstoogmerk</span><span class="stat-val">Nee</span></div>
+          <div class="stat-row"><span class="stat-label">Status</span><span class="stat-val">In oprichting 2026</span></div>
+          <div class="stat-row"><span class="stat-label">Vestiging</span><span class="stat-val">Den Haag</span></div>
+          <div class="stat-row"><span class="stat-label">Contact</span><span class="stat-val">info@mentalign.nl</span></div>
+        </div>
+        <div class="stat-block">
+          <h4>Oprichters</h4>
+          <div class="stat-row"><span class="stat-label">Him Vischnudatt</span><span class="stat-val">CaleidoZorg</span></div>
+          <div class="stat-row"><span class="stat-label">Stephan Valk</span><span class="stat-val">Voorm. Parnassia Groep</span></div>
+          <div class="stat-row"><span class="stat-label">Kees Haverkamp</span><span class="stat-val">Yes We Can & Hawking</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="partners" id="partners">
+  <div class="section-inner">
+    <span class="s-eyebrow reveal">Partners & technologie</span>
+    <h2 class="s-h2 reveal">Gebouwd op solide fundamenten</h2>
+    <p class="s-lead reveal">MentAlign werkt samen met betrouwbare Nederlandse partijen voor hosting, technologie en zorginhoudelijke expertise.</p>
+
+    <div class="partners-grid">
+      <div class="partner-card reveal">
+        <span class="partner-role">Hosting</span>
+        <h3>Exonet</h3>
+        <p>Veilige managed hosting op servers in Nederland. Alle data blijft aantoonbaar op Nederlands grondgebied — geen cloud-afhankelijkheid.</p>
+      </div>
+      <div class="partner-card reveal rd1">
+        <span class="partner-role">Technologieleverancier</span>
+        <h3>Hawking Health</h3>
+        <p>Het MentAlign-platform draait op Hawking Discovery — een modulair zorgplatform voor digitalisering in de GGZ, ontwikkeld voor de Nederlandse markt.</p>
+      </div>
+      <div class="partner-card reveal rd2">
+        <span class="partner-role">Samenwerkingsverband</span>
+        <h3>Zorgverzekeraars & GGZ</h3>
+        <p>Een breed samenwerkingsverband van zorgverzekeraars en GGZ-aanbieders ondersteunt de ontwikkeling en uitrol van het Mentaal Schakelpunt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="section-inner">
+    <div class="cta-box reveal">
+      <h2>In gesprek met MentAlign?</h2>
+      <p>Bent u behandelaar, beleidsmaker, GGZ-aanbieder of werkt u bij een regio of zorgverzekeraar? Wij gaan graag in gesprek over samenwerking of aansluiting.</p>
+      <div class="cta-actions">
+        <a href="mailto:info@mentalign.nl" class="btn-teal">Mail ons</a>
+        <a href="https://rapporteren.mentalign.nl" class="btn-outline">Rapportage platform</a>
+        <a href="https://msp.mentalign.nl" class="btn-outline">Mentaal Schakelpunt</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="nav-logo" style="margin-bottom:.25rem">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">Ment<span>Align</span></span>
+      </div>
+      <p>Stichting MentAlign · In oprichting · Not-for-profit · Den Haag · 2026</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://rapporteren.mentalign.nl">rapporteren.mentalign.nl</a>
+      <a href="https://msp.mentalign.nl">msp.mentalign.nl</a>
+      <a href="mailto:info@mentalign.nl">info@mentalign.nl</a>
+    </div>
+    <div class="footer-partners">
+      <span class="fp-label">Met dank aan</span>
+      <div class="fp-items">
+        <span class="fp-item"><strong>Exonet</strong> — veilige hosting op Nederlandse servers</span>
+        <span class="fp-item"><strong>Hawking Health</strong> — technologieleverancier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.08 }
+);
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
